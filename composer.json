@@ -1,0 +1,19 @@
+{
+    "name": "lean-stack/cinetixx-client",
+    "description": "Cinetixx CinemaWebService client library",
+    "license": "ISC",
+    "authors": [
+        {
+            "name": "Micha Alt",
+            "email": "mail@lean-stack.de"
+        }
+    ],
+    "autoload": {
+      "psr-4": {
+        "LeanStack\\CinetixxClient\\": "src"
+      }
+    },
+    "require": {
+        "zendframework/zend-soap": "^2.5"
+    }
+}
