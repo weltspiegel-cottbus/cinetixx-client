@@ -2,15 +2,13 @@
 
 class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
 {
-    // Constant CinemaId
-    const CINEMA_ID = 808957959;
 
     /** @var  \LeanStack\CinetixxClient\CinemaWebService */
     protected $client;
 
     protected function setUp()
     {
-        $authToken = new \LeanStack\CinetixxClient\Auth\Token("ZACO_WEBSERVICE","c46f44194070");
+        $authToken = new \LeanStack\CinetixxClient\Auth\Token(CINETIXX_LOGIN,CINETIXX_PASSWD);
         $this->client = new \LeanStack\CinetixxClient\CinemaWebService($authToken, true);
     }
 
@@ -23,7 +21,7 @@ class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
         $now = new DateTime();
         $to = $now->modify('next friday');
 
-        $events = $this->client->GetEventsForCinema(self::CINEMA_ID,$from,$to);
+        $events = $this->client->GetEventsForCinema(CINEMA_ID,$from,$to);
         $this->assertInternalType('array',$events);
 
         foreach($events as $ev) {

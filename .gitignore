@@ -5,3 +5,6 @@ vendor/
 # PHPStorm
 .idea/
 
+# Sensible data
+phpunit.xml
+
