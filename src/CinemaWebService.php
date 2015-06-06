@@ -6,9 +6,11 @@ use LeanStack\CinetixxClient\Auth\Token;
 
 use LeanStack\CinetixxClient\DTO\Event;
 use LeanStack\CinetixxClient\DTO\EventInformation;
+use LeanStack\CinetixxClient\DTO\Image;
 use LeanStack\CinetixxClient\DTO\ShowDetail;
-
 use LeanStack\CinetixxClient\DTO\TypedText;
+
+use LeanStack\CinetixxClient\Message\GetEventImagesRequest;
 use LeanStack\CinetixxClient\Message\GetEventInformationRequest;
 use LeanStack\CinetixxClient\Message\GetEventInformationResponse;
 use LeanStack\CinetixxClient\Message\GetEventsForCinemaRequest;
@@ -37,76 +39,7 @@ class CinemaWebService extends \SoapClient {
         "DTOShowDetail" => ShowDetail::class,
         "DTOEventInformation" => EventInformation::class,
         "DTOTypedText" => TypedText::class,
-        /*
-                "DTOMandatorCinemas" => "DTOMandatorCinemas",
-                "DTOAuditoriumShort" => "DTOAuditoriumShort",
-                "DTOImage" => "DTOImage",
-                "AuthenticationSoapHeader" => "AuthenticationSoapHeader",
-                "GetMandatorVoucherTypes" => "GetMandatorVoucherTypes",
-                "GetMandatorVoucherTypesResponse" => "GetMandatorVoucherTypesResponse",
-                "DTORVoucherType" => "DTORVoucherType",
-                "GetMandatorProducts" => "GetMandatorProducts",
-                "GetMandatorProductsResponse" => "GetMandatorProductsResponse",
-                "DTORGood" => "DTORGood",
-                "GoodType" => "GoodType",
-                "GetAuditoriumInformation" => "GetAuditoriumInformation",
-                "GetAuditoriumInformationResponse" => "GetAuditoriumInformationResponse",
-                "DTOAuditoriumInformation" => "DTOAuditoriumInformation",
-                "DTOCinemaShort" => "DTOCinemaShort",
-                "DTOCinemaAddress" => "DTOCinemaAddress",
-                "DTOCityShort" => "DTOCityShort",
-                "DTOSeatConfiguration" => "DTOSeatConfiguration",
-                "GetAuditoriumsForCinema" => "GetAuditoriumsForCinema",
-                "GetAuditoriumsForCinemaResponse" => "GetAuditoriumsForCinemaResponse",
-                "DTOAuditoriumInformationList" => "DTOAuditoriumInformationList",
-                "DTOEventsForCinema" => "DTOEventsForCinema",
-                "GetEventInformation" => "GetEventInformation",
-                "GetEventImages" => "GetEventImages",
-                "GetEventImagesResponse" => "GetEventImagesResponse",
-                "DTOEventImages" => "DTOEventImages",
-                "GetShowsForEvent" => "GetShowsForEvent",
-                "GetShowsForEventResponse" => "GetShowsForEventResponse",
-                "DTOEventShows" => "DTOEventShows",
-                "GetShowInformation" => "GetShowInformation",
-                "GetShowInformationResponse" => "GetShowInformationResponse",
-                "DTORShow" => "DTORShow",
-                "DTORShowStatus" => "DTORShowStatus",
-                "DTORCinema" => "DTORCinema",
-                "DTORCity" => "DTORCity",
-                "DTORResidence" => "DTORResidence",
-                "DTORPhone" => "DTORPhone",
-                "DTORImage" => "DTORImage",
-                "DTORAuditorium" => "DTORAuditorium",
-                "DTORSeatConfiguration" => "DTORSeatConfiguration",
-                "DTORTicketPrice" => "DTORTicketPrice",
-                "DTORResultInformation" => "DTORResultInformation",
-                "GetSectorsForShow" => "GetSectorsForShow",
-                "GetSectorsForShowResponse" => "GetSectorsForShowResponse",
-                "DTOShowSector" => "DTOShowSector",
-                "DTOSector" => "DTOSector",
-                "GetSeatsForSector" => "GetSeatsForSector",
-                "GetSeatsForSectorResponse" => "GetSeatsForSectorResponse",
-                "DTOShowSeatInformation" => "DTOShowSeatInformation",
-                "DTOSeatdefinition" => "DTOSeatdefinition",
-                "DTOSectorelement" => "DTOSectorelement",
-                "DTOPriceArea" => "DTOPriceArea",
-                "GetShowSeatStatus" => "GetShowSeatStatus",
-                "GetShowSeatStatusResponse" => "GetShowSeatStatusResponse",
-                "DTOShowSeatStatus" => "DTOShowSeatStatus",
-                "DTOSeatShort" => "DTOSeatShort",
-                "GetShowPriceConfiguration" => "GetShowPriceConfiguration",
-                "GetShowPriceConfigurationResponse" => "GetShowPriceConfigurationResponse",
-                "GetShowsForCinema" => "GetShowsForCinema",
-                "GetShowsForCinemaResponse" => "GetShowsForCinemaResponse",
-                "DTOShowsForCinema" => "DTOShowsForCinema",
-                "DTOShowInfo" => "DTOShowInfo",
-                "GetMovieInformation" => "GetMovieInformation",
-                "GetMovieInformationResponse" => "GetMovieInformationResponse",
-                "DTOREvent" => "DTOREvent",
-                "DTORMovie" => "DTORMovie",
-                "DTORTypedText" => "DTORTypedText",
-                "DTORCast" => "DTORCast",
-                */
+        "DTOImage" => Image::class,
     ];
 
     /**
@@ -196,242 +129,19 @@ class CinemaWebService extends \SoapClient {
         return $response->GetEventInformationResult;
     }
 
-    public function GetEventImages($mixed = null) {
-        $validParameters = array(
-            "(GetEventImages)",
-            "(GetEventImages)",
-        );
-        $args = func_get_args();
-        $this->_checkArguments($args, $validParameters);
-        return $this->__soapCall("GetEventImages", $args);
-    }
-
-
     /**
-     * Checks if an argument list matches against a valid argument type list
-     * @param array $arguments The argument list to check
-     * @param array $validParameters A list of valid argument types
-     * @return boolean true if arguments match against validParameters
-     * @throws \Exception invalid function signature message
+     * Get images for given event id
+     *
+     * @param int $eventId
+     * @return Image[]
      */
-    public function _checkArguments($arguments, $validParameters) {
-        $variables = "";
-        foreach ($arguments as $arg) {
-            $type = gettype($arg);
-            if ($type == "object") {
-                $type = get_class($arg);
-            }
-            $variables .= "(".$type.")";
-        }
-        if (!in_array($variables, $validParameters)) {
-            throw new \Exception("Invalid parameter types: ".str_replace(")(", ", ", $variables));
-        }
-        return true;
+    public function GetEventImages($eventId) {
+
+        $args = new GetEventImagesRequest($eventId);
+
+        $response = $this->__soapCall("GetEventImages", [$args]);
+
+        return $response->GetEventImagesResult->ImageList->DTOImage;
     }
-
-	/**
-	 * Service Call: GetMandatorVoucherTypes
-	 * Parameter options:
-	 * (GetMandatorVoucherTypes) parameters
-	 * (GetMandatorVoucherTypes) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetMandatorVoucherTypesResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetMandatorVoucherTypes($mixed = null) {
-		$validParameters = array(
-			"(GetMandatorVoucherTypes)",
-			"(GetMandatorVoucherTypes)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetMandatorVoucherTypes", $args);
-	}
-
-
-	/**
-	 * Service Call: GetMandatorProducts
-	 * Parameter options:
-	 * (GetMandatorProducts) parameters
-	 * (GetMandatorProducts) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetMandatorProductsResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetMandatorProducts($mixed = null) {
-		$validParameters = array(
-			"(GetMandatorProducts)",
-			"(GetMandatorProducts)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetMandatorProducts", $args);
-	}
-
-
-	/**
-	 * Service Call: GetAuditoriumInformation
-	 * Parameter options:
-	 * (GetAuditoriumInformation) parameters
-	 * (GetAuditoriumInformation) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetAuditoriumInformationResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetAuditoriumInformation($mixed = null) {
-		$validParameters = array(
-			"(GetAuditoriumInformation)",
-			"(GetAuditoriumInformation)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetAuditoriumInformation", $args);
-	}
-
-
-	/**
-	 * Service Call: GetAuditoriumsForCinema
-	 * Parameter options:
-	 * (GetAuditoriumsForCinema) parameters
-	 * (GetAuditoriumsForCinema) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetAuditoriumsForCinemaResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetAuditoriumsForCinema($mixed = null) {
-		$validParameters = array(
-			"(GetAuditoriumsForCinema)",
-			"(GetAuditoriumsForCinema)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetAuditoriumsForCinema", $args);
-	}
-
-
-
-
-
-	/**
-	 * Service Call: GetShowInformation
-	 * Parameter options:
-	 * (GetShowInformation) parameters
-	 * (GetShowInformation) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetShowInformationResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetShowInformation($mixed = null) {
-		$validParameters = array(
-			"(GetShowInformation)",
-			"(GetShowInformation)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetShowInformation", $args);
-	}
-
-
-	/**
-	 * Service Call: GetSectorsForShow
-	 * Parameter options:
-	 * (GetSectorsForShow) parameters
-	 * (GetSectorsForShow) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetSectorsForShowResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetSectorsForShow($mixed = null) {
-		$validParameters = array(
-			"(GetSectorsForShow)",
-			"(GetSectorsForShow)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetSectorsForShow", $args);
-	}
-
-
-	/**
-	 * Service Call: GetSeatsForSector
-	 * Parameter options:
-	 * (GetSeatsForSector) parameters
-	 * (GetSeatsForSector) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetSeatsForSectorResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetSeatsForSector($mixed = null) {
-		$validParameters = array(
-			"(GetSeatsForSector)",
-			"(GetSeatsForSector)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetSeatsForSector", $args);
-	}
-
-
-	/**
-	 * Service Call: GetShowSeatStatus
-	 * Parameter options:
-	 * (GetShowSeatStatus) parameters
-	 * (GetShowSeatStatus) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetShowSeatStatusResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetShowSeatStatus($mixed = null) {
-		$validParameters = array(
-			"(GetShowSeatStatus)",
-			"(GetShowSeatStatus)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetShowSeatStatus", $args);
-	}
-
-
-	/**
-	 * Service Call: GetShowPriceConfiguration
-	 * Parameter options:
-	 * (GetShowPriceConfiguration) parameters
-	 * (GetShowPriceConfiguration) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetShowPriceConfigurationResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetShowPriceConfiguration($mixed = null) {
-		$validParameters = array(
-			"(GetShowPriceConfiguration)",
-			"(GetShowPriceConfiguration)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetShowPriceConfiguration", $args);
-	}
-
-
-
-
-	/**
-	 * Service Call: GetMovieInformation
-	 * Parameter options:
-	 * (GetMovieInformation) parameters
-	 * (GetMovieInformation) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetMovieInformationResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetMovieInformation($mixed = null) {
-		$validParameters = array(
-			"(GetMovieInformation)",
-			"(GetMovieInformation)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetMovieInformation", $args);
-	}
-
 
 }

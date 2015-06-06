@@ -62,4 +62,16 @@ class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
             $this->assertNotNull($infos);
         });
     }
+
+    /**
+     * @depends testGetEvents
+     * @param integer[] $eventIds
+     */
+    public function testGetEventImages(array $eventIds)
+    {
+        array_walk($eventIds, function ($id) {
+            $imageList = $this->client->GetEventImages($id);
+            $this->assertInternalType("array", $imageList);
+        });
+    }
 }
