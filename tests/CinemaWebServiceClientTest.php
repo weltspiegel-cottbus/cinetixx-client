@@ -47,8 +47,19 @@ class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
 
         array_walk($eventIds, function ($id) use ($from,$to) {
             $shows = $this->client->GetShowsForEvent($id,$from,$to);
-            print( "EventId: $id , Anzahl: " . count($shows) . "\r\n");
             $this->assertInternalType('array',$shows);
+        });
+    }
+
+    /**
+     * @depends testGetEvents
+     * @param integer[] $eventIds
+     */
+    public function testGetEventInformation(array $eventIds)
+    {
+        array_walk($eventIds, function ($id) {
+            $infos = $this->client->GetEventInformation($id);
+            $this->assertNotNull($infos);
         });
     }
 }

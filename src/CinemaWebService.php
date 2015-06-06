@@ -3,13 +3,15 @@
 namespace LeanStack\CinetixxClient;
 
 use LeanStack\CinetixxClient\Auth\Token;
-use LeanStack\CinetixxClient\DTO\Cinema;
+
 use LeanStack\CinetixxClient\DTO\Event;
+use LeanStack\CinetixxClient\DTO\EventInformation;
 use LeanStack\CinetixxClient\DTO\ShowDetail;
+
+use LeanStack\CinetixxClient\DTO\TypedText;
+use LeanStack\CinetixxClient\Message\GetEventInformationRequest;
+use LeanStack\CinetixxClient\Message\GetEventInformationResponse;
 use LeanStack\CinetixxClient\Message\GetEventsForCinemaRequest;
-use LeanStack\CinetixxClient\Message\GetEventsForCinemaResponse;
-use LeanStack\CinetixxClient\Message\GetMandatorCinemas;
-use LeanStack\CinetixxClient\Message\GetMandatorCinemasResponse;
 use LeanStack\CinetixxClient\Message\GetShowsForEventRequest;
 
 /**
@@ -29,12 +31,13 @@ class CinemaWebService extends \SoapClient {
      * @var array
 	 */
 	private static $classmap = [
+        "GetEventInformationResponse" => GetEventInformationResponse::class,
+
         "DTOEventShort" => Event::class,
         "DTOShowDetail" => ShowDetail::class,
+        "DTOEventInformation" => EventInformation::class,
+        "DTOTypedText" => TypedText::class,
         /*
-               "GetMandatorCinemas" => GetMandatorCinemas::class,
-               "GetMandatorCinemasResponse" => GetMandatorCinemasResponse::class,
-               "DTOCinemaExtended" => Cinema::class,
                 "DTOMandatorCinemas" => "DTOMandatorCinemas",
                 "DTOAuditoriumShort" => "DTOAuditoriumShort",
                 "DTOImage" => "DTOImage",
@@ -58,9 +61,6 @@ class CinemaWebService extends \SoapClient {
                 "DTOAuditoriumInformationList" => "DTOAuditoriumInformationList",
                 "DTOEventsForCinema" => "DTOEventsForCinema",
                 "GetEventInformation" => "GetEventInformation",
-                "GetEventInformationResponse" => "GetEventInformationResponse",
-                "DTOEventInformation" => "DTOEventInformation",
-                "DTOTypedText" => "DTOTypedText",
                 "GetEventImages" => "GetEventImages",
                 "GetEventImagesResponse" => "GetEventImagesResponse",
                 "DTOEventImages" => "DTOEventImages",
@@ -180,17 +180,34 @@ class CinemaWebService extends \SoapClient {
         return $screenedShows;
     }
 
+    /**
+     * Returns detail information for given event
+     *
+     * @param integer $eventId
+     * @return EventInformation
+     */
+    public function GetEventInformation($eventId) {
 
-    public function GetShowsForCinema($cinemaId, \DateTime $dateFrom, \DateTime $dateUntil) {
+        $args = new GetEventInformationRequest($eventId);
 
-		return $this->__soapCall("GetShowsForCinema", [
-            $cinemaId,
-            $dateFrom->format(\DateTime::W3C),
-            $dateUntil->format(\DateTime::W3C)
-        ]);
-	}
+        /** @var GetEventInformationResponse $response */
+        $response = $this->__soapCall("GetEventInformation", [$args]);
 
-	/**
+        return $response->GetEventInformationResult;
+    }
+
+    public function GetEventImages($mixed = null) {
+        $validParameters = array(
+            "(GetEventImages)",
+            "(GetEventImages)",
+        );
+        $args = func_get_args();
+        $this->_checkArguments($args, $validParameters);
+        return $this->__soapCall("GetEventImages", $args);
+    }
+
+
+    /**
      * Checks if an argument list matches against a valid argument type list
      * @param array $arguments The argument list to check
      * @param array $validParameters A list of valid argument types
@@ -211,22 +228,6 @@ class CinemaWebService extends \SoapClient {
         }
         return true;
     }
-
-    /**
-     * Returns the mandator's cinemas
-     * @return Cinema
-     */
-	public function GetMandatorCinemas() {
-
-        $args = func_get_args();
-        $result = $this->__soapCall("GetMandatorCinemas", $args);
-
-        // TODO: return array
-        /** @var Cinema $cinema */
-        $cinema = $result->GetMandatorCinemasResult->Cinemas->DTOCinemaExtended;
-		return $cinema;
-	}
-
 
 	/**
 	 * Service Call: GetMandatorVoucherTypes
@@ -308,44 +309,6 @@ class CinemaWebService extends \SoapClient {
 	}
 
 
-	/**
-	 * Service Call: GetEventInformation
-	 * Parameter options:
-	 * (GetEventInformation) parameters
-	 * (GetEventInformation) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetEventInformationResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetEventInformation($mixed = null) {
-		$validParameters = array(
-			"(GetEventInformation)",
-			"(GetEventInformation)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetEventInformation", $args);
-	}
-
-
-	/**
-	 * Service Call: GetEventImages
-	 * Parameter options:
-	 * (GetEventImages) parameters
-	 * (GetEventImages) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetEventImagesResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetEventImages($mixed = null) {
-		$validParameters = array(
-			"(GetEventImages)",
-			"(GetEventImages)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetEventImages", $args);
-	}
 
 
 
