@@ -6,7 +6,7 @@ namespace LeanStack\CinetixxClient\Message;
  * Class GetEventsForCinema
  * @package LeanStack\CinetixxClient\Message
  */
-class GetEventsForCinema {
+class GetEventsForCinemaRequest {
 
 	/**
 	 * @var integer

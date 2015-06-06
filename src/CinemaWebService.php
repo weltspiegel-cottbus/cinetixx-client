@@ -5,7 +5,7 @@ namespace LeanStack\CinetixxClient;
 use LeanStack\CinetixxClient\Auth\Token;
 use LeanStack\CinetixxClient\DTO\Cinema;
 use LeanStack\CinetixxClient\DTO\Event;
-use LeanStack\CinetixxClient\Message\GetEventsForCinema;
+use LeanStack\CinetixxClient\Message\GetEventsForCinemaRequest;
 use LeanStack\CinetixxClient\Message\GetEventsForCinemaResponse;
 use LeanStack\CinetixxClient\Message\GetMandatorCinemas;
 use LeanStack\CinetixxClient\Message\GetMandatorCinemasResponse;
@@ -27,13 +27,12 @@ class CinemaWebService extends \SoapClient {
      * @var array
 	 */
 	private static $classmap = [
-        "GetEventsForCinema" => GetEventsForCinema::class,
-        "GetEventsForCinemaResponse" => GetEventsForCinemaResponse::class,
+        "GetEventsForCinema" => GetEventsForCinemaRequest::class,
         "DTOEventShort" => Event::class,
+        /*
 		"GetMandatorCinemas" => GetMandatorCinemas::class,
 		"GetMandatorCinemasResponse" => GetMandatorCinemasResponse::class,
         "DTOCinemaExtended" => Cinema::class,
-        /*
          "DTOMandatorCinemas" => "DTOMandatorCinemas",
          "DTOAuditoriumShort" => "DTOAuditoriumShort",
          "DTOImage" => "DTOImage",
@@ -133,9 +132,17 @@ class CinemaWebService extends \SoapClient {
 		$this->__setSoapHeaders(new \SoapHeader(self::NS,"AuthenticationSoapHeader",$authToken));
 	}
 
+    /**
+     * Get Events for given Cinema Id
+     * 
+     * @param $cinemaId
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateUntil
+     * @return Event[]
+     */
     public function GetEventsForCinema($cinemaId, \DateTime $dateFrom, \DateTime $dateUntil) {
 
-        $args = new GetEventsForCinema($cinemaId, $dateFrom, $dateUntil);
+        $args = new GetEventsForCinemaRequest($cinemaId, $dateFrom, $dateUntil);
         $response =  $this->__soapCall("GetEventsForCinema",[$args]);
 
         return $response->GetEventsForCinemaResult->Events->DTOEventShort;
