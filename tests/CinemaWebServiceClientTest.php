@@ -17,7 +17,7 @@ class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
         $eventIds = [];
 
         $now = new DateTime();
-        $from = $now->modify('today noon');
+        $from = $now->modify('today');
         $now = new DateTime();
         $to = $now->modify('next friday');
 
