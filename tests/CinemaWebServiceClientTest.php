@@ -16,6 +16,8 @@ class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
 
     public function testGetEvents()
     {
+        $eventIds = [];
+
         $now = new DateTime();
         $from = $now->modify('today noon');
         $now = new DateTime();
@@ -23,5 +25,30 @@ class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
 
         $events = $this->client->GetEventsForCinema(self::CINEMA_ID,$from,$to);
         $this->assertInternalType('array',$events);
+
+        foreach($events as $ev) {
+            $eventIds[] = $ev->EventId;
+        }
+
+        return $eventIds;
+    }
+
+    /**
+     * @depends testGetEvents
+     * @param integer[] $eventIds
+     */
+    public function testGetShowsForEvents(array $eventIds)
+    {
+
+        $now = new DateTime();
+        $from = $now->modify('today');
+        $now = new DateTime();
+        $to = $now->modify('tomorrow');
+
+        array_walk($eventIds, function ($id) use ($from,$to) {
+            $shows = $this->client->GetShowsForEvent($id,$from,$to);
+            print( "EventId: $id , Anzahl: " . count($shows) . "\r\n");
+            $this->assertInternalType('array',$shows);
+        });
     }
 }

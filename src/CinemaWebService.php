@@ -5,10 +5,12 @@ namespace LeanStack\CinetixxClient;
 use LeanStack\CinetixxClient\Auth\Token;
 use LeanStack\CinetixxClient\DTO\Cinema;
 use LeanStack\CinetixxClient\DTO\Event;
+use LeanStack\CinetixxClient\DTO\ShowDetail;
 use LeanStack\CinetixxClient\Message\GetEventsForCinemaRequest;
 use LeanStack\CinetixxClient\Message\GetEventsForCinemaResponse;
 use LeanStack\CinetixxClient\Message\GetMandatorCinemas;
 use LeanStack\CinetixxClient\Message\GetMandatorCinemasResponse;
+use LeanStack\CinetixxClient\Message\GetShowsForEventRequest;
 
 /**
  * Class CinemaWebService
@@ -27,85 +29,84 @@ class CinemaWebService extends \SoapClient {
      * @var array
 	 */
 	private static $classmap = [
-        "GetEventsForCinema" => GetEventsForCinemaRequest::class,
         "DTOEventShort" => Event::class,
+        "DTOShowDetail" => ShowDetail::class,
         /*
-		"GetMandatorCinemas" => GetMandatorCinemas::class,
-		"GetMandatorCinemasResponse" => GetMandatorCinemasResponse::class,
-        "DTOCinemaExtended" => Cinema::class,
-         "DTOMandatorCinemas" => "DTOMandatorCinemas",
-         "DTOAuditoriumShort" => "DTOAuditoriumShort",
-         "DTOImage" => "DTOImage",
-         "AuthenticationSoapHeader" => "AuthenticationSoapHeader",
-         "GetMandatorVoucherTypes" => "GetMandatorVoucherTypes",
-         "GetMandatorVoucherTypesResponse" => "GetMandatorVoucherTypesResponse",
-         "DTORVoucherType" => "DTORVoucherType",
-         "GetMandatorProducts" => "GetMandatorProducts",
-         "GetMandatorProductsResponse" => "GetMandatorProductsResponse",
-         "DTORGood" => "DTORGood",
-         "GoodType" => "GoodType",
-         "GetAuditoriumInformation" => "GetAuditoriumInformation",
-         "GetAuditoriumInformationResponse" => "GetAuditoriumInformationResponse",
-         "DTOAuditoriumInformation" => "DTOAuditoriumInformation",
-         "DTOCinemaShort" => "DTOCinemaShort",
-         "DTOCinemaAddress" => "DTOCinemaAddress",
-         "DTOCityShort" => "DTOCityShort",
-         "DTOSeatConfiguration" => "DTOSeatConfiguration",
-         "GetAuditoriumsForCinema" => "GetAuditoriumsForCinema",
-         "GetAuditoriumsForCinemaResponse" => "GetAuditoriumsForCinemaResponse",
-         "DTOAuditoriumInformationList" => "DTOAuditoriumInformationList",
-         "DTOEventsForCinema" => "DTOEventsForCinema",
-         "GetEventInformation" => "GetEventInformation",
-         "GetEventInformationResponse" => "GetEventInformationResponse",
-         "DTOEventInformation" => "DTOEventInformation",
-         "DTOTypedText" => "DTOTypedText",
-         "GetEventImages" => "GetEventImages",
-         "GetEventImagesResponse" => "GetEventImagesResponse",
-         "DTOEventImages" => "DTOEventImages",
-         "GetShowsForEvent" => "GetShowsForEvent",
-         "GetShowsForEventResponse" => "GetShowsForEventResponse",
-         "DTOEventShows" => "DTOEventShows",
-         "DTOShowDetail" => "DTOShowDetail",
-         "GetShowInformation" => "GetShowInformation",
-         "GetShowInformationResponse" => "GetShowInformationResponse",
-         "DTORShow" => "DTORShow",
-         "DTORShowStatus" => "DTORShowStatus",
-         "DTORCinema" => "DTORCinema",
-         "DTORCity" => "DTORCity",
-         "DTORResidence" => "DTORResidence",
-         "DTORPhone" => "DTORPhone",
-         "DTORImage" => "DTORImage",
-         "DTORAuditorium" => "DTORAuditorium",
-         "DTORSeatConfiguration" => "DTORSeatConfiguration",
-         "DTORTicketPrice" => "DTORTicketPrice",
-         "DTORResultInformation" => "DTORResultInformation",
-         "GetSectorsForShow" => "GetSectorsForShow",
-         "GetSectorsForShowResponse" => "GetSectorsForShowResponse",
-         "DTOShowSector" => "DTOShowSector",
-         "DTOSector" => "DTOSector",
-         "GetSeatsForSector" => "GetSeatsForSector",
-         "GetSeatsForSectorResponse" => "GetSeatsForSectorResponse",
-         "DTOShowSeatInformation" => "DTOShowSeatInformation",
-         "DTOSeatdefinition" => "DTOSeatdefinition",
-         "DTOSectorelement" => "DTOSectorelement",
-         "DTOPriceArea" => "DTOPriceArea",
-         "GetShowSeatStatus" => "GetShowSeatStatus",
-         "GetShowSeatStatusResponse" => "GetShowSeatStatusResponse",
-         "DTOShowSeatStatus" => "DTOShowSeatStatus",
-         "DTOSeatShort" => "DTOSeatShort",
-         "GetShowPriceConfiguration" => "GetShowPriceConfiguration",
-         "GetShowPriceConfigurationResponse" => "GetShowPriceConfigurationResponse",
-         "GetShowsForCinema" => "GetShowsForCinema",
-         "GetShowsForCinemaResponse" => "GetShowsForCinemaResponse",
-         "DTOShowsForCinema" => "DTOShowsForCinema",
-         "DTOShowInfo" => "DTOShowInfo",
-         "GetMovieInformation" => "GetMovieInformation",
-         "GetMovieInformationResponse" => "GetMovieInformationResponse",
-         "DTOREvent" => "DTOREvent",
-         "DTORMovie" => "DTORMovie",
-         "DTORTypedText" => "DTORTypedText",
-         "DTORCast" => "DTORCast",
-         */
+               "GetMandatorCinemas" => GetMandatorCinemas::class,
+               "GetMandatorCinemasResponse" => GetMandatorCinemasResponse::class,
+               "DTOCinemaExtended" => Cinema::class,
+                "DTOMandatorCinemas" => "DTOMandatorCinemas",
+                "DTOAuditoriumShort" => "DTOAuditoriumShort",
+                "DTOImage" => "DTOImage",
+                "AuthenticationSoapHeader" => "AuthenticationSoapHeader",
+                "GetMandatorVoucherTypes" => "GetMandatorVoucherTypes",
+                "GetMandatorVoucherTypesResponse" => "GetMandatorVoucherTypesResponse",
+                "DTORVoucherType" => "DTORVoucherType",
+                "GetMandatorProducts" => "GetMandatorProducts",
+                "GetMandatorProductsResponse" => "GetMandatorProductsResponse",
+                "DTORGood" => "DTORGood",
+                "GoodType" => "GoodType",
+                "GetAuditoriumInformation" => "GetAuditoriumInformation",
+                "GetAuditoriumInformationResponse" => "GetAuditoriumInformationResponse",
+                "DTOAuditoriumInformation" => "DTOAuditoriumInformation",
+                "DTOCinemaShort" => "DTOCinemaShort",
+                "DTOCinemaAddress" => "DTOCinemaAddress",
+                "DTOCityShort" => "DTOCityShort",
+                "DTOSeatConfiguration" => "DTOSeatConfiguration",
+                "GetAuditoriumsForCinema" => "GetAuditoriumsForCinema",
+                "GetAuditoriumsForCinemaResponse" => "GetAuditoriumsForCinemaResponse",
+                "DTOAuditoriumInformationList" => "DTOAuditoriumInformationList",
+                "DTOEventsForCinema" => "DTOEventsForCinema",
+                "GetEventInformation" => "GetEventInformation",
+                "GetEventInformationResponse" => "GetEventInformationResponse",
+                "DTOEventInformation" => "DTOEventInformation",
+                "DTOTypedText" => "DTOTypedText",
+                "GetEventImages" => "GetEventImages",
+                "GetEventImagesResponse" => "GetEventImagesResponse",
+                "DTOEventImages" => "DTOEventImages",
+                "GetShowsForEvent" => "GetShowsForEvent",
+                "GetShowsForEventResponse" => "GetShowsForEventResponse",
+                "DTOEventShows" => "DTOEventShows",
+                "GetShowInformation" => "GetShowInformation",
+                "GetShowInformationResponse" => "GetShowInformationResponse",
+                "DTORShow" => "DTORShow",
+                "DTORShowStatus" => "DTORShowStatus",
+                "DTORCinema" => "DTORCinema",
+                "DTORCity" => "DTORCity",
+                "DTORResidence" => "DTORResidence",
+                "DTORPhone" => "DTORPhone",
+                "DTORImage" => "DTORImage",
+                "DTORAuditorium" => "DTORAuditorium",
+                "DTORSeatConfiguration" => "DTORSeatConfiguration",
+                "DTORTicketPrice" => "DTORTicketPrice",
+                "DTORResultInformation" => "DTORResultInformation",
+                "GetSectorsForShow" => "GetSectorsForShow",
+                "GetSectorsForShowResponse" => "GetSectorsForShowResponse",
+                "DTOShowSector" => "DTOShowSector",
+                "DTOSector" => "DTOSector",
+                "GetSeatsForSector" => "GetSeatsForSector",
+                "GetSeatsForSectorResponse" => "GetSeatsForSectorResponse",
+                "DTOShowSeatInformation" => "DTOShowSeatInformation",
+                "DTOSeatdefinition" => "DTOSeatdefinition",
+                "DTOSectorelement" => "DTOSectorelement",
+                "DTOPriceArea" => "DTOPriceArea",
+                "GetShowSeatStatus" => "GetShowSeatStatus",
+                "GetShowSeatStatusResponse" => "GetShowSeatStatusResponse",
+                "DTOShowSeatStatus" => "DTOShowSeatStatus",
+                "DTOSeatShort" => "DTOSeatShort",
+                "GetShowPriceConfiguration" => "GetShowPriceConfiguration",
+                "GetShowPriceConfigurationResponse" => "GetShowPriceConfigurationResponse",
+                "GetShowsForCinema" => "GetShowsForCinema",
+                "GetShowsForCinemaResponse" => "GetShowsForCinemaResponse",
+                "DTOShowsForCinema" => "DTOShowsForCinema",
+                "DTOShowInfo" => "DTOShowInfo",
+                "GetMovieInformation" => "GetMovieInformation",
+                "GetMovieInformationResponse" => "GetMovieInformationResponse",
+                "DTOREvent" => "DTOREvent",
+                "DTORMovie" => "DTORMovie",
+                "DTORTypedText" => "DTORTypedText",
+                "DTORCast" => "DTORCast",
+                */
     ];
 
     /**
@@ -133,8 +134,8 @@ class CinemaWebService extends \SoapClient {
 	}
 
     /**
-     * Get Events for given Cinema Id
-     * 
+     * Get Events for given cinema id
+     *
      * @param $cinemaId
      * @param \DateTime $dateFrom
      * @param \DateTime $dateUntil
@@ -143,12 +144,44 @@ class CinemaWebService extends \SoapClient {
     public function GetEventsForCinema($cinemaId, \DateTime $dateFrom, \DateTime $dateUntil) {
 
         $args = new GetEventsForCinemaRequest($cinemaId, $dateFrom, $dateUntil);
-        $response =  $this->__soapCall("GetEventsForCinema",[$args]);
+        $response = $this->__soapCall("GetEventsForCinema",[$args]);
 
         return $response->GetEventsForCinemaResult->Events->DTOEventShort;
     }
 
-	public function GetShowsForCinema($cinemaId, \DateTime $dateFrom, \DateTime $dateUntil) {
+    /**
+     * Get Shows for given event id
+     *
+     * @param $eventId
+     * @param \DateTime $dateFrom
+     * @param \DateTime $dateUntil
+     * @return ShowDetail[]
+     */
+    public function GetShowsForEvent($eventId, \DateTime $dateFrom, \DateTime $dateUntil) {
+
+        $args = new GetShowsForEventRequest($eventId, $dateFrom, $dateUntil);
+        $response = $this->__soapCall("GetShowsForEvent", [$args]);
+
+        /** @var ShowDetail[] $shows */
+        $shows = $response->GetShowsForEventResult->Shows->DTOShowDetail;
+
+        // Single show?
+        if( !is_array($shows))
+            $shows = [$shows];
+
+        // GetShowsForEvent SOAP action get all reservable shows, not only the current screened shows
+        $screenedShows = [];
+
+        foreach($shows as $show) {
+            $showStart = new \DateTime($show->ShowStart);
+            if( $showStart > $dateFrom && $showStart < $dateUntil)
+                $screenedShows[] = $shows;
+        }
+        return $screenedShows;
+    }
+
+
+    public function GetShowsForCinema($cinemaId, \DateTime $dateFrom, \DateTime $dateUntil) {
 
 		return $this->__soapCall("GetShowsForCinema", [
             $cinemaId,
@@ -314,25 +347,6 @@ class CinemaWebService extends \SoapClient {
 		return $this->__soapCall("GetEventImages", $args);
 	}
 
-
-	/**
-	 * Service Call: GetShowsForEvent
-	 * Parameter options:
-	 * (GetShowsForEvent) parameters
-	 * (GetShowsForEvent) parameters
-	 * @param mixed,... See function description for parameter options
-	 * @return GetShowsForEventResponse
-	 * @throws Exception invalid function signature message
-	 */
-	public function GetShowsForEvent($mixed = null) {
-		$validParameters = array(
-			"(GetShowsForEvent)",
-			"(GetShowsForEvent)",
-		);
-		$args = func_get_args();
-		$this->_checkArguments($args, $validParameters);
-		return $this->__soapCall("GetShowsForEvent", $args);
-	}
 
 
 	/**

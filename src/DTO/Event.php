@@ -8,14 +8,21 @@ namespace LeanStack\CinetixxClient\DTO;
  */
 class Event {
 
+    /**
+     * @var integer
+     */
+    public $EventId;
+
 	/**
 	 * @var string
 	 */
 	public $EventName;
+
 	/**
 	 * @var integer
 	 */
 	public $CinemaId;
+
 	/**
 	 * @var string
 	 */

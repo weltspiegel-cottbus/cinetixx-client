@@ -3,15 +3,15 @@
 namespace LeanStack\CinetixxClient\Message;
 
 /**
- * Class GetEventsForCinema
+ * Class GetShowsForEvent
  * @package LeanStack\CinetixxClient\Message
  */
-class GetEventsForCinemaRequest {
+class GetShowsForEventRequest {
 
-	/**
+    /**
 	 * @var integer
 	 */
-	public $cinemaId;
+	public $eventId;
 
 	/**
 	 * @var string
@@ -24,14 +24,14 @@ class GetEventsForCinemaRequest {
 	public $dateUntil;
 
     /**
-     * GetEventsForCinemaRequest constructor.
-     * @param int $cinemaId
+     * GetShowsForEventRequest constructor.
+     * @param int $eventId
      * @param \DateTime $dateFrom
      * @param \DateTime $dateUntil
      */
-    public function __construct($cinemaId, \DateTime $dateFrom, \DateTime $dateUntil)
+    public function __construct($eventId, \DateTime $dateFrom, \DateTime $dateUntil)
     {
-        $this->cinemaId = $cinemaId;
+        $this->eventId = $eventId;
         $this->dateFrom = $dateFrom->format(\DateTime::W3C);
         $this->dateUntil = $dateUntil->format(\DateTime::W3C);
     }
