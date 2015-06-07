@@ -1,5 +1,7 @@
 <?php
 
+use LeanStack\CinetixxClient\DTO\ShowDetail;
+
 class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
 {
 
@@ -46,6 +48,9 @@ class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
         array_walk($eventIds, function ($id) use ($from,$to) {
             $shows = $this->client->GetShowsForEvent($id,$from,$to);
             $this->assertInternalType('array',$shows);
+            if( count($shows) > 0 ) {
+                $this->assertInstanceOf(ShowDetail::class,$shows[0]);
+            }
         });
     }
 

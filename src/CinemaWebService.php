@@ -108,7 +108,7 @@ class CinemaWebService extends \SoapClient {
         foreach($shows as $show) {
             $showStart = new \DateTime($show->ShowStart);
             if( $showStart > $dateFrom && $showStart < $dateUntil)
-                $screenedShows[] = $shows;
+                $screenedShows[] = $show;
         }
         return $screenedShows;
     }
