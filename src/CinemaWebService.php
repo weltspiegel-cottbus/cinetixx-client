@@ -14,6 +14,7 @@ use LeanStack\CinetixxClient\Message\GetEventImagesRequest;
 use LeanStack\CinetixxClient\Message\GetEventInformationRequest;
 use LeanStack\CinetixxClient\Message\GetEventInformationResponse;
 use LeanStack\CinetixxClient\Message\GetEventsForCinemaRequest;
+use LeanStack\CinetixxClient\Message\GetMovieInformationRequest;
 use LeanStack\CinetixxClient\Message\GetShowsForEventRequest;
 
 /**
@@ -144,4 +145,18 @@ class CinemaWebService extends \SoapClient {
         return $response->GetEventImagesResult->ImageList->DTOImage;
     }
 
+    /**
+     * Get detailed movie information
+     * 
+     * @param $movieId
+     * @return \stdClass
+     */
+    public function GetMovieInformation($movieId) {
+
+        $args = new GetMovieInformationRequest($movieId);
+
+        $response = $this->__soapCall("GetMovieInformation", [$args]);
+
+        return $response->GetMovieInformationResult;
+    }
 }

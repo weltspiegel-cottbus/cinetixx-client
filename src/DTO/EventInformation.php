@@ -3,7 +3,7 @@
 namespace LeanStack\CinetixxClient\DTO;
 
 /**
- * Class DTOEventInformation
+ * Class EventInformation
  * @package LeanStack\CinetixxClient\DTO
  */
 class EventInformation {
