@@ -103,15 +103,7 @@ class CinemaWebService extends \SoapClient {
         if( !is_array($shows))
             $shows = [$shows];
 
-        // GetShowsForEvent SOAP action get all reservable shows, not only the current screened shows
-        $screenedShows = [];
-
-        foreach($shows as $show) {
-            $showStart = new \DateTime($show->ShowStart);
-            if( $showStart > $dateFrom && $showStart < $dateUntil)
-                $screenedShows[] = $show;
-        }
-        return $screenedShows;
+        return $shows;
     }
 
     /**
