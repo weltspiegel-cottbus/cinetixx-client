@@ -4,6 +4,11 @@ Cinetixx CinemaWebService client library
 Changelog:
 ----------
 
+* v1.0.3: Not filtering shows
+
+    It is not my deal to filter only current shows.
+
+
 * v1.0.2: MovieInformation available
 
     Implemented next methods (no class mapping by now)
