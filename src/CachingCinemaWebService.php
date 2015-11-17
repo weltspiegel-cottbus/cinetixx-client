@@ -12,18 +12,6 @@ use Lean\Cache\CacheItemPool;
 
 use LeanStack\CinetixxClient\Auth\Token;
 
-use LeanStack\CinetixxClient\DTO\Event;
-use LeanStack\CinetixxClient\DTO\EventInformation;
-use LeanStack\CinetixxClient\DTO\Image;
-use LeanStack\CinetixxClient\DTO\ShowDetail;
-use LeanStack\CinetixxClient\DTO\TypedText;
-
-use LeanStack\CinetixxClient\Message\GetEventImagesRequest;
-use LeanStack\CinetixxClient\Message\GetEventInformationRequest;
-use LeanStack\CinetixxClient\Message\GetEventInformationResponse;
-use LeanStack\CinetixxClient\Message\GetEventsForCinemaRequest;
-use LeanStack\CinetixxClient\Message\GetMovieInformationRequest;
-use LeanStack\CinetixxClient\Message\GetShowsForEventRequest;
 
 /**
  * Description of CachingCinemaWebService
@@ -57,7 +45,7 @@ class CachingCinemaWebService extends CinemaWebService {
         } else {
             $data = parent::GetEventsForCinema($cinemaId, $dateFrom, $dateUntil);
             $item->set($data);
-            $item->expiresAfter(30);
+            $item->expiresAfter(3600);
             $this->cache->save($item);
         }
         
@@ -75,7 +63,7 @@ class CachingCinemaWebService extends CinemaWebService {
         } else {
             $data = parent::GetEventImages($eventId);
             $item->set($data);
-            $item->expiresAfter(30);
+            $item->expiresAfter(3600);
             $this->cache->save($item);
         }
         
@@ -93,7 +81,7 @@ class CachingCinemaWebService extends CinemaWebService {
         } else {
             $data = parent::GetEventInformation($eventId);
             $item->set($data);
-            $item->expiresAfter(30);
+            $item->expiresAfter(3600);
             $this->cache->save($item);
         }
         
@@ -111,7 +99,7 @@ class CachingCinemaWebService extends CinemaWebService {
         } else {
             $data = parent::GetMovieInformation($movieId);
             $item->set($data);
-            $item->expiresAfter(30);
+            $item->expiresAfter(3600);
             $this->cache->save($item);
         }
         
@@ -130,7 +118,7 @@ class CachingCinemaWebService extends CinemaWebService {
         } else {
             $data = parent::GetShowsForEvent($eventId, $dateFrom, $dateUntil);
             $item->set($data);
-            $item->expiresAfter(30);
+            $item->expiresAfter(3600);
             $this->cache->save($item);
         }
         
