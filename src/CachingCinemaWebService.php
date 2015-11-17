@@ -49,16 +49,92 @@ class CachingCinemaWebService extends CinemaWebService {
     public function GetEventsForCinema($cinemaId, \DateTime $dateFrom, \DateTime $dateUntil) {
         
         $key = 'events';
-        $events = null;
+        $data = null;
         
         $item = $this->cache->getItem($key);
         if( $item->isHit() ) {
-            $events = $item->get();
+            $data = $item->get();
         } else {
-            $events = parent::GetEventsForCinema($cinemaId, $dateFrom, $dateUntil);
-            $item->set($events);
+            $data = parent::GetEventsForCinema($cinemaId, $dateFrom, $dateUntil);
+            $item->set($data);
+            $item->expiresAfter(30);
+            $this->cache->save($item);
         }
         
-        return $events;
+        return $data;
     }
+    
+    public function GetEventImages($eventId) {
+        
+        $key = 'event_images_' . $eventId;
+        $data = null;
+        
+        $item = $this->cache->getItem($key);
+        if( $item->isHit() ) {
+            $data = $item->get();
+        } else {
+            $data = parent::GetEventImages($eventId);
+            $item->set($data);
+            $item->expiresAfter(30);
+            $this->cache->save($item);
+        }
+        
+        return $data;
+    }
+
+    public function GetEventInformation($eventId) {
+        
+        $key = 'event_info_' . $eventId;
+        $data = null;
+        
+        $item = $this->cache->getItem($key);
+        if( $item->isHit() ) {
+            $data = $item->get();
+        } else {
+            $data = parent::GetEventInformation($eventId);
+            $item->set($data);
+            $item->expiresAfter(30);
+            $this->cache->save($item);
+        }
+        
+        return $data;
+    }
+
+    public function GetMovieInformation($movieId) {
+        
+        $key = 'movie_info_' . $movieId;
+        $data = null;
+        
+        $item = $this->cache->getItem($key);
+        if( $item->isHit() ) {
+            $data = $item->get();
+        } else {
+            $data = parent::GetMovieInformation($movieId);
+            $item->set($data);
+            $item->expiresAfter(30);
+            $this->cache->save($item);
+        }
+        
+        return $data;
+      
+    }
+
+    public function GetShowsForEvent($eventId, \DateTime $dateFrom, \DateTime $dateUntil) {
+        
+        $key = 'event_shows_' . $eventId;
+        $data = null;
+        
+        $item = $this->cache->getItem($key);
+        if( $item->isHit() ) {
+            $data = $item->get();
+        } else {
+            $data = parent::GetShowsForEvent($eventId, $dateFrom, $dateUntil);
+            $item->set($data);
+            $item->expiresAfter(30);
+            $this->cache->save($item);
+        }
+        
+        return $data;
+    }
+
 }
