@@ -1,7 +1,7 @@
 {
     "name": "lean-stack/cinetixx-client",
     "description": "Cinetixx CinemaWebService client library",
-    "license": "ISC",
+    "license": "MIT",
     "authors": [
         {
             "name": "Micha Alt",
