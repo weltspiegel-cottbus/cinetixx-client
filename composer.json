@@ -14,6 +14,6 @@
       }
     },
     "require": {
-        "symfony/cache": "^3.2"
+        "lean-stack/cache": "^1.0"
     }
 }
