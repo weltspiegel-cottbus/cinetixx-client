@@ -4,10 +4,14 @@ Cinetixx CinemaWebService client library
 Changelog:
 ----------
 
-* v1.0.7: Events can have no shows
+* v1.1.1: Events can have no shows
 
     Don't know whom to blame ...
 
+* v1.1.0: Caching works
+
+    And we do cache now for about an hour.
+    
 * v1.0.6: Cache as cache can
 
     All methods are cached
