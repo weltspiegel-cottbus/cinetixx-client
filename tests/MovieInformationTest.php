@@ -1,6 +1,6 @@
 <?php
 
-class MovieInformationTest extends PHPUnit_Framework_TestCase
+class MovieInformationTest extends \PHPUnit\Framework\TestCase
 {
     /** @var  \LeanStack\CinetixxClient\CinemaWebService */
     protected $client;

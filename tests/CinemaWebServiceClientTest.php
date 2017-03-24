@@ -2,7 +2,7 @@
 
 use LeanStack\CinetixxClient\DTO\ShowDetail;
 
-class CinemaWebServiceClientTest extends PHPUnit_Framework_TestCase
+class CinemaWebServiceClientTest extends \PHPUnit\Framework\TestCase
 {
 
     /** @var  \LeanStack\CinetixxClient\CinemaWebService */
