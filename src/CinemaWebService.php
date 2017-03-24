@@ -96,6 +96,11 @@ class CinemaWebService extends \SoapClient {
         $args = new GetShowsForEventRequest($eventId, $dateFrom, $dateUntil);
         $response = $this->__soapCall("GetShowsForEvent", [$args]);
 
+        // Special case: no shows for an event
+        if (!isset($response->GetShowsForEventResult->Shows->DTOShowDetail)) {
+            return [];
+        }
+
         /** @var ShowDetail[] $shows */
         $shows = $response->GetShowsForEventResult->Shows->DTOShowDetail;
 
