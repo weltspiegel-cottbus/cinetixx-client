@@ -16,6 +16,5 @@ class MovieInformationTest extends PHPUnit_Framework_TestCase
         $movieId = 1377236969;
         $movie = $this->client->GetMovieInformation($movieId);
         $this->assertNotNull($movie);
-        var_dump($movie);
     }
 }
