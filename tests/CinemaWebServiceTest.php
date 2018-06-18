@@ -2,7 +2,7 @@
 
 use LeanStack\CinetixxClient\DTO\ShowDetail;
 
-class CinemaWebServiceClientTest extends \PHPUnit\Framework\TestCase
+class CinemaWebServiceTest extends \PHPUnit\Framework\TestCase
 {
 
     /** @var  \LeanStack\CinetixxClient\CinemaWebService */
