@@ -15,7 +15,8 @@
     },
     "require": {
         "lean-stack/cache": "^1.0",
-        "zendframework/zend-soap": "^2.7"
+        "zendframework/zend-soap": "^2.7",
+        "sabre/xml": "^2.1"
     },
     "require-dev": {
         "phpunit/phpunit": "^7.2"

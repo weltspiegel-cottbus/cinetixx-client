@@ -4,6 +4,7 @@
         bootstrap="vendor/autoload.php"
         >
     <php>
+        <const name="MANDATOR_ID" value="Your_Mandator_id"/>
         <const name="CINETIXX_LOGIN" value="Your_Cinetixx_Login"/>
         <const name="CINETIXX_PASSWD" value="Your_Cinetixx_Password"/>
         <const name="CINEMA_ID" value="Cinema_Id"/>
