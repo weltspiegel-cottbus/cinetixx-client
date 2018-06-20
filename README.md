@@ -4,6 +4,10 @@ Cinetixx CinemaWebService client library
 Changelog:
 ----------
 
+* v1.2.0: Cinetixx Service
+
+    And now: the all new Cinetixx Service Client
+
 * v1.1.1: Events can have no shows
 
     Don't know whom to blame ...
