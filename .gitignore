@@ -1,10 +1,8 @@
-# Composer
-composer.phar
-vendor/
-
-# PHPStorm
-.idea/
-
 # Sensible data
 phpunit.xml
 
+# Composer deps
+/vendor/
+
+# Editor/IDE settings
+.idea/
