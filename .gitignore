@@ -1,8 +1,11 @@
 # Sensible data
-phpunit.xml
+/phpunit.xml
+
+# Runtime artefacts
+/.phpunit.result.cache
 
 # Composer deps
 /vendor/
 
 # Editor/IDE settings
-.idea/
+/.idea/

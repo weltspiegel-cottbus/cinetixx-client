@@ -1,0 +1,13 @@
+<phpunit
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:noNamespaceSchemaLocation="https://schema.phpunit.de/8.4/phpunit.xsd"
+>
+	<php>
+		<const name="MANDATOR_ID" value="123456789" />
+	</php>
+	<testsuites>
+		<testsuite name="Cinetixx API Client">
+			<directory>tests/</directory>
+		</testsuite>
+	</testsuites>
+</phpunit>

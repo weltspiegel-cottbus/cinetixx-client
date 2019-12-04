@@ -1,21 +1,31 @@
 {
-    "name": "lean-stack/cinetixx-client",
-    "description": "Cinetixx API Client Library",
-    "license": "MIT",
-    "version": "2.0.0",
-    "authors": [
-        {
-            "name": "Micha Alt",
-            "email": "mail@lean-stack.de"
-        }
-    ],
-    "autoload": {
-      "psr-4": {
-        "LeanStack\\CinetixxAPI\\": "src"
-      }
-    },
-    "require": {
-    },
-    "require-dev": {
-    }
+	"name": "lean-stack/cinetixx-client",
+	"description": "Cinetixx API Client Library",
+	"license": "MIT",
+	"version": "2.0.0",
+	"authors": [
+		{
+			"name": "Micha Alt",
+			"email": "mail@lean-stack.de"
+		}
+	],
+	"scripts": {
+		"test": "phpunit --testdox"
+	},
+	"autoload": {
+		"psr-4": {
+			"LeanStack\\CinetixxAPI\\": "src"
+		}
+	},
+	"autoload-dev": {
+		"psr-4": {
+			"LeanStack\\CinetixxAPI\\Tests\\": "tests"
+		}
+	},
+	"require": {
+		"php": "^7.3.11"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^8.4"
+	}
 }
