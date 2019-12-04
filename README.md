@@ -4,6 +4,10 @@ Cinetixx CinemaWebService client library
 Changelog:
 ----------
 
+* v1.2.1: Using now the official cinetixx api.
+
+    And now: the all new Cinetixx Service Client
+
 * v1.2.0: Cinetixx Service
 
     And now: the all new Cinetixx Service Client
