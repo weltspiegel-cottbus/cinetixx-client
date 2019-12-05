@@ -3,6 +3,7 @@
 
 # Runtime artefacts
 /.phpunit.result.cache
+/.cache/
 
 # Composer deps
 /vendor/

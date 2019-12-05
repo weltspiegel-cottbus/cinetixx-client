@@ -4,8 +4,12 @@ namespace LeanStack\CinetixxAPI;
 
 use Exception;
 use LeanStack\CinetixxAPI\Model\Event;
+use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpClient\HttpClient;
+use Symfony\Contracts\Cache\CacheInterface;
+use Symfony\Contracts\Cache\ItemInterface;
 
 class CinetixxClient
 {
@@ -15,25 +19,42 @@ class CinetixxClient
 	private $mandatorId;
 
 	/**
+	 * @var CacheInterface
+	 */
+	private $cache;
+
+	/**
 	 * CinetixxClient constructor.
 	 * @param int $mandatorId
 	 */
 	public function __construct(int $mandatorId)
 	{
 		$this->mandatorId = $mandatorId;
+		$this->cache = new FilesystemAdapter('cinetixx', 3600, dirname(__DIR__).'/.cache');
 	}
 
 	/**
 	 * @return Event[]
 	 * @throws Exception
+	 * @throws InvalidArgumentException
 	 */
 	public function getEvents(): array
 	{
 		try {
-			$httpClient = HttpClient::create();
-			$response = $httpClient->request('GET', 'https://api.cinetixx.de/Services/CinetixxService.asmx/GetShowInfoV6?mandatorId=' . $this->mandatorId);
+			$responseBody = $this->cache->get('response', function (ItemInterface $item) {
 
-			$crawler = new Crawler($response->getContent());
+				$httpClient = HttpClient::create();
+				$response = $httpClient->request('GET',
+					'https://api.cinetixx.de/Services/CinetixxService.asmx/GetShowInfoV6',[ 'query' =>
+						[
+							'mandatorId' => $this->mandatorId
+						]
+					]);
+
+				return $response->getContent();
+			});
+
+			$crawler = new Crawler($responseBody);
 
 			$eventIds = []; // Collecting unique event ids
 			$events = [];   // Mapped events
