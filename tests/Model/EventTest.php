@@ -25,4 +25,9 @@ class EventTest extends TestCase
 		$this->event->setTitle('Frozem');
 		$this->assertEquals('Frozem', $this->event->getTitle());
 	}
-}
+
+	public function testHasText()
+	{
+		$this->event->setText('Elsa and Anna');
+		$this->assertEquals('Elsa and Anna', $this->event->getText());
+	}}

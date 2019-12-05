@@ -5,6 +5,7 @@ namespace LeanStack\CinetixxAPI\Tests;
 use LeanStack\CinetixxAPI\CinetixxClient;
 use LeanStack\CinetixxAPI\Model\Event;
 use PHPUnit\Framework\TestCase;
+use Psr\Cache\InvalidArgumentException;
 
 class CinetixxClientTest extends TestCase
 {
@@ -36,6 +37,17 @@ class CinetixxClientTest extends TestCase
 			$this->assertInstanceOf(Event::class, $firstEvent);
 		}
 		return $firstEvent;
+	}
+
+	/**
+	 * @depends testGetEventsReturnsAnArrayOfEvents
+	 * @param Event $expected
+	 * @throws InvalidArgumentException
+	 */
+	public function testGetEventReturnsSingleEventById(Event $expected)
+	{
+		$event = $this->client->getEvent($expected->getId());
+		$this->assertEquals($expected->getTitle(), $event->getTitle());
 	}
 
 	/**

@@ -68,8 +68,22 @@ class CinetixxClient
 				if (array_search($eventId, $eventIds) === false) {
 					$eventIds[] = $eventId;
 					$event = new Event();
-					$event->setId(intval($eventId));
-					$event->setTitle($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text());
+						$event
+							->setId(intval($eventId))
+							->setTitle($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setText($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setGenre($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setFormat3D($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setDuration($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setLanguage($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setFsk($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setPoster($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setPosterBig($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->setTrailerLink($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->addImage($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->addImage($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+							->addImage($node->filterXPath('Show/VERANSTALTUNGSTITEL')->text())
+						;
 					$events[$eventId] = $event;
 				} else {
 					$event = $events[$eventId];
@@ -80,5 +94,16 @@ class CinetixxClient
 		} catch (\Throwable $e) {
 			throw new Exception($e->getMessage());
 		}
+	}
+
+	/**
+	 * @param int $eventId
+	 * @return Event|mixed
+	 * @throws Exception
+	 * @throws InvalidArgumentException
+	 */
+	public function getEvent(int $eventId)
+	{
+		return $this->getEvents()[$eventId];
 	}
 }
