@@ -10,7 +10,8 @@
 		}
 	],
 	"scripts": {
-		"test": "phpunit --testdox"
+		"test": "phpunit --testdox",
+		"test:coverage": "phpunit --testdox --coverage-html .coverage"
 	},
 	"autoload": {
 		"psr-4": {

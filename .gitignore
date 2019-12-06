@@ -1,9 +1,10 @@
 # Sensible data
 /phpunit.xml
 
-# Runtime artefacts
-/.phpunit.result.cache
+# Runtime/Testing artefacts
 /.cache/
+/.phpunit.result.cache
+/.coverage/
 
 # Composer deps
 /vendor/
