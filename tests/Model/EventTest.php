@@ -87,6 +87,18 @@ class EventTest extends TestCase
 		$this->assertEquals('https://youtu.be/dZ7UU2JeAvo', $this->event->getTrailerLink());
 	}
 
+	public function testHasYoutubeId()
+	{
+		$this->event->setYoutubeId('abcdefghijk');
+		$this->assertEquals('abcdefghijk', $this->event->getYoutubeId());
+	}
+
+	public function testExtractsYoutubeIdFromTrailerIfNone()
+	{
+		$this->event->setTrailerLink('https://youtu.be/dZ7UU2JeAvo');
+		$this->assertEquals('dZ7UU2JeAvo', $this->event->getYoutubeId());
+	}
+
 	public function testHasImages()
 	{
 		$this->event->addImage('img1.png');

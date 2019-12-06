@@ -41,6 +41,9 @@ class Event
 	/** @var string */
 	private $trailerLink;
 
+	/** @var string */
+	private $youtubeId;
+
 	/** @var string[] */
 	private $images;
 
@@ -268,6 +271,30 @@ class Event
 	public function setTrailerLink(string $trailerLink): Event
 	{
 		$this->trailerLink = $trailerLink;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getYoutubeId(): string
+	{
+		if ($this->youtubeId === null) {
+			$url = $this->getTrailerLink();
+			preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
+			return $match[1];
+		}
+
+		return $this->youtubeId;
+	}
+
+	/**
+	 * @param string $youtubeId
+	 * @return Event
+	 */
+	public function setYoutubeId(string $youtubeId): Event
+	{
+		$this->youtubeId = $youtubeId;
 		return $this;
 	}
 

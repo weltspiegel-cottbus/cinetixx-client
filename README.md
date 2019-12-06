@@ -6,10 +6,11 @@
 
     Client implementing the Cinetixx XML API: https://api.cinetixx.de/
 
-## Todo
-* Extracting of Youtube-IDs in the Model
+* v2.1.0: YoutubeId release
 
-  See: https://gist.github.com/ghalusa/6c7f3a00fd2383e5ef33
+    Youtube ID will be calculated from trailer link
+    
+## Todo
 
 * Reuqest seat infos
 
