@@ -14,7 +14,7 @@ class CinetixxClientTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$this->client = new CinetixxClient(MANDATOR_ID);
+		$this->client = new CinetixxClient($_ENV['MANDATOR_ID']);
 	}
 
 	public function testIsCreatable()
