@@ -4,6 +4,7 @@ namespace LeanStack\CinetixxAPI\Tests;
 
 use LeanStack\CinetixxAPI\CinetixxClient;
 use LeanStack\CinetixxAPI\Model\Event;
+use LeanStack\CinetixxAPI\Model\Show;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\InvalidArgumentException;
 
@@ -74,5 +75,91 @@ class CinetixxClientTest extends TestCase
 			$this->assertNotEmpty($event->getTitle());
 		}
 		return $event;
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveTitles
+	 * @param Event $event
+	 * @return Show
+	 */
+	public function testReturnedEventsHaveShows(Event $event)
+	{
+		$show = null;
+
+		if($event !== null) {
+			$shows = $event->getShows();
+			$this->assertIsArray($shows);
+			if (count($shows) > 0) {
+				$show = $shows[0];
+				$this->assertInstanceOf(Show::class, $show);
+			}
+		}
+
+		return $show;
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveShows
+	 * @param Show $show
+	 * @return Show
+	 */
+	public function testReturnedShowsHaveIds(Show $show)
+	{
+		if($show !== null) {
+			$this->assertGreaterThan(0, $show->getId());
+		}
+		return $show;
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveShows
+	 * @param Show $show
+	 * @return Show
+	 */
+	public function testReturnedShowsHaveShowStarts(Show $show)
+	{
+		if($show !== null) {
+			$this->assertInstanceOf(\DateTime::class, $show->getShowStart());
+		}
+		return $show;
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveShows
+	 * @param Show $show
+	 * @return Show
+	 */
+	public function testReturnedShowsHaveSellingStarts(Show $show)
+	{
+		if($show !== null) {
+			$this->assertInstanceOf(\DateTime::class, $show->getSellingStart());
+		}
+		return $show;
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveShows
+	 * @param Show $show
+	 * @return Show
+	 */
+	public function testReturnedShowsHaveSellingEnds(Show $show)
+	{
+		if($show !== null) {
+			$this->assertInstanceOf(\DateTime::class, $show->getSellingEnd());
+		}
+		return $show;
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveShows
+	 * @param Show $show
+	 * @return Show
+	 */
+	public function testReturnedShowsHaveCinetixxLinks(Show $show)
+	{
+		if($show !== null) {
+			$this->assertIsString($show->getCinetixxLink());
+		}
+		return $show;
 	}
 }

@@ -4,6 +4,7 @@ namespace LeanStack\CinetixxAPI;
 
 use Exception;
 use LeanStack\CinetixxAPI\Model\Event;
+use LeanStack\CinetixxAPI\Model\Show;
 use Psr\Cache\InvalidArgumentException;
 use Symfony\Component\Cache\Adapter\FilesystemAdapter;
 use Symfony\Component\DomCrawler\Crawler;
@@ -89,6 +90,17 @@ class CinetixxClient
 				} else {
 					$event = $events[$eventId];
 				}
+
+				// Add show to event
+				$show = new Show();
+				$show
+					->setId(intval($node->filterXPath('Show/SHOW_ID')->text()))
+					->setShowStart($node->filterXPath('Show/SHOW_BEGINNING')->text())
+					->setSellingStart($node->filterXPath('Show/VERKAUFSSTART')->text())
+					->setSellingEnd($node->filterXPath('Show/VERKAUFSENDE')->text())
+					->setCinetixxLink($node->filterXPath('Show/BOOKING_LINK')->text())
+				;
+				$event->addShow($show);
 
 			});
 			return $events;

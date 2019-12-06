@@ -30,4 +30,34 @@ class ShowTest extends TestCase
 		}
 		$this->assertEquals($showStart, $this->show->getShowStart());
 	}
+
+	public function testHasSellingStart()
+	{
+		$sellingStart = new \DateTime('2019-12-04T16:45:00+01:00');
+		try {
+			$this->show->setSellingStart($sellingStart->format(\DateTime::W3C));
+		} catch (\Exception $e) {
+		}
+		$this->assertEquals($sellingStart, $this->show->getSellingStart());
+	}
+
+	public function testHasSellingEnd()
+	{
+		$sellingEnd = new \DateTime('2019-12-04T16:45:00+01:00');
+		try {
+			$this->show->setSellingEnd($sellingEnd->format(\DateTime::W3C));
+		} catch (\Exception $e) {
+		}
+		$this->assertEquals($sellingEnd, $this->show->getSellingEnd());
+	}
+
+	public function testHasCinetixxLink()
+	{
+		$cinetixxLink = 'https://booking.cinetixx.de/';
+		try {
+			$this->show->setCinetixxLink($cinetixxLink);
+		} catch (\Exception $e) {
+		}
+		$this->assertEquals($cinetixxLink, $this->show->getCinetixxLink());
+	}
 }
