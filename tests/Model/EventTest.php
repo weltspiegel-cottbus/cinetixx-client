@@ -1,30 +1,33 @@
 <?php
 
-use LeanStack\CinetixxClient\Model\Event;
+namespace LeanStack\CinetixxAPI\Tests\Model;
+
+use LeanStack\CinetixxAPI\Model\Event;
 use PHPUnit\Framework\TestCase;
 
 class EventTest extends TestCase
 {
-    /** @var Event */
-    protected $event;
+	private $event;
 
-    protected function setUp()
-    {
-        $this->event = new Event(
-            12345678,
-            '12 MONKEYS'
-        );
-    }
+	protected function setUp(): void
+	{
+		$this->event = new Event();
+	}
 
-    public function testHasEventId() {
-        $this->assertNotNull($this->event->getEventId());
-    }
+	public function testHasId()
+	{
+		$this->event->setId(17);
+		$this->assertEquals(17, $this->event->getId());
+	}
 
-    public function testHasTitle() {
-        $this->assertNotNull($this->event->getTitle());
-    }
+	public function testHasTitle()
+	{
+		$this->event->setTitle('Frozem');
+		$this->assertEquals('Frozem', $this->event->getTitle());
+	}
 
-    public function testHasShows() {
-        $this->assertNotNull($this->event->getShows());
-    }
-}
+	public function testHasText()
+	{
+		$this->event->setText('Elsa and Anna');
+		$this->assertEquals('Elsa and Anna', $this->event->getText());
+	}}

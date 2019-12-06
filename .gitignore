@@ -1,10 +1,13 @@
-# Composer
-composer.phar
-vendor/
-
-# PHPStorm
-.idea/
-
 # Sensible data
-phpunit.xml
+/phpunit.xml
 
+# Runtime/Testing artefacts
+/.cache/
+/.phpunit.result.cache
+/.coverage/
+
+# Composer deps
+/vendor/
+
+# Editor/IDE settings
+/.idea/
