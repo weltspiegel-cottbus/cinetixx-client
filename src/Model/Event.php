@@ -15,6 +15,9 @@ class Event
 	private $text;
 
 	/** @var string */
+	private $textShort;
+
+	/** @var string */
 	private $language;
 
 	/** @var string */
@@ -103,6 +106,24 @@ class Event
 	public function setText(string $text): Event
 	{
 		$this->text = $text;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getTextShort(): string
+	{
+		return $this->textShort;
+	}
+
+	/**
+	 * @param string $textShort
+	 * @return Event
+	 */
+	public function setTextShort(string $textShort): Event
+	{
+		$this->textShort = $textShort;
 		return $this;
 	}
 
@@ -264,6 +285,7 @@ class Event
 	 */
 	public function addImage(string $image): Event
 	{
+		// Todo: don't add empty images
 		$this->images[] = $image;
 		return $this;
 	}
