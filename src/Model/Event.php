@@ -41,6 +41,9 @@ class Event
 	/** @var string */
 	private $trailerLink;
 
+	/** @var string */
+	private $youtubeId;
+
 	/** @var string[] */
 	private $images;
 
@@ -268,6 +271,24 @@ class Event
 	public function setTrailerLink(string $trailerLink): Event
 	{
 		$this->trailerLink = $trailerLink;
+		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getYoutubeId(): string
+	{
+		return $this->youtubeId;
+	}
+
+	/**
+	 * @param string $youtubeId
+	 * @return Event
+	 */
+	public function setYoutubeId(string $youtubeId): Event
+	{
+		$this->youtubeId = $youtubeId;
 		return $this;
 	}
 
