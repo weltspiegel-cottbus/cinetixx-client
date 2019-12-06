@@ -18,6 +18,7 @@ class CinetixxClientTest extends TestCase
 	{
 		$client = HttpClient::create();
 		$cache = new FilesystemAdapter('cinetixx', 3600, dirname(__DIR__).'/.cache');
+		$cache->clear();
 		$this->client = new CinetixxClient($_ENV['MANDATOR_ID'], $client, $cache);
 	}
 
@@ -71,18 +72,137 @@ class CinetixxClientTest extends TestCase
 	/**
 	 * @depends testReturnedEventsHaveIds
 	 * @param Event $event
-	 * @return Event
 	 */
 	public function testReturnedEventsHaveTitles(Event $event)
 	{
 		if($event !== null) {
 			$this->assertNotEmpty($event->getTitle());
 		}
-		return $event;
 	}
 
 	/**
-	 * @depends testReturnedEventsHaveTitles
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveTexts(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getText());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveShortTexts(Event $event)
+	{
+		if($event !== null) {
+			$this->assertIsString($event->getTextShort());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveLangzages(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getLanguage());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveGenres(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getGenre());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveDurations(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getDuration());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveRatings(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getFsk());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveFormatFlags(Event $event)
+	{
+		if($event !== null) {
+			$this->assertIsBool($event->isFormat3D());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHavePosters(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getPoster());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveBigPosters(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getPosterBig());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveTrailerLinks(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getTrailerLink());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
+	public function testReturnedEventsHaveImages(Event $event)
+	{
+		if($event !== null) {
+			$this->assertIsArray($event->getImages());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
 	 * @param Event $event
 	 * @return Show
 	 */
