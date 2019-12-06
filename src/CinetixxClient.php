@@ -11,6 +11,7 @@ use Symfony\Component\DomCrawler\Crawler;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\Cache\CacheInterface;
 use Symfony\Contracts\Cache\ItemInterface;
+use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 class CinetixxClient
 {
@@ -20,6 +21,11 @@ class CinetixxClient
 	private $mandatorId;
 
 	/**
+	 * @var HttpClientInterface
+	 */
+	private $httpClient;
+
+	/**
 	 * @var CacheInterface
 	 */
 	private $cache;
@@ -27,11 +33,14 @@ class CinetixxClient
 	/**
 	 * CinetixxClient constructor.
 	 * @param int $mandatorId
+	 * @param HttpClientInterface $httpClient
+	 * @param CacheInterface $cache
 	 */
-	public function __construct(int $mandatorId)
+	public function __construct(int $mandatorId, HttpClientInterface $httpClient, CacheInterface $cache)
 	{
 		$this->mandatorId = $mandatorId;
-		$this->cache = new FilesystemAdapter('cinetixx', 3600, dirname(__DIR__).'/.cache');
+		$this->httpClient = $httpClient;
+		$this->cache = $cache;
 	}
 
 	/**
@@ -44,8 +53,7 @@ class CinetixxClient
 		try {
 			$responseBody = $this->cache->get('response', function (ItemInterface $item) {
 
-				$httpClient = HttpClient::create();
-				$response = $httpClient->request('GET',
+				$response = $this->httpClient->request('GET',
 					'https://api.cinetixx.de/Services/CinetixxService.asmx/GetShowInfoV6',[ 'query' =>
 						[
 							'mandatorId' => $this->mandatorId

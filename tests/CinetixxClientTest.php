@@ -7,6 +7,8 @@ use LeanStack\CinetixxAPI\Model\Event;
 use LeanStack\CinetixxAPI\Model\Show;
 use PHPUnit\Framework\TestCase;
 use Psr\Cache\InvalidArgumentException;
+use Symfony\Component\Cache\Adapter\FilesystemAdapter;
+use Symfony\Component\HttpClient\HttpClient;
 
 class CinetixxClientTest extends TestCase
 {
@@ -14,7 +16,9 @@ class CinetixxClientTest extends TestCase
 
 	protected function setUp(): void
 	{
-		$this->client = new CinetixxClient($_ENV['MANDATOR_ID']);
+		$client = HttpClient::create();
+		$cache = new FilesystemAdapter('cinetixx', 3600, dirname(__DIR__).'/.cache');
+		$this->client = new CinetixxClient($_ENV['MANDATOR_ID'], $client, $cache);
 	}
 
 	public function testIsCreatable()
