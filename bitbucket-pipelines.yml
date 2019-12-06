@@ -1,0 +1,6 @@
+image: php:7.3
+pipelines:
+  default:
+    - step:
+        script:
+          - php -v
