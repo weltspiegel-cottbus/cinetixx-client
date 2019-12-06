@@ -279,6 +279,12 @@ class Event
 	 */
 	public function getYoutubeId(): string
 	{
+		if ($this->youtubeId === null) {
+			$url = $this->getTrailerLink();
+			preg_match('%(?:youtube(?:-nocookie)?\.com/(?:[^/]+/.+/|(?:v|e(?:mbed)?)/|.*[?&]v=)|youtu\.be/)([^"&?/ ]{11})%i', $url, $match);
+			return $match[1];
+		}
+
 		return $this->youtubeId;
 	}
 
