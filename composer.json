@@ -2,7 +2,6 @@
 	"name": "lean-stack/cinetixx-client",
 	"description": "Cinetixx API Client Library",
 	"license": "MIT",
-	"version": "2.0.0",
 	"authors": [
 		{
 			"name": "Micha Alt",
@@ -31,5 +30,10 @@
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^8.4"
+	},
+	"extra": {
+		"branch-alias": {
+			"dev-master": "2.2-dev"
+		}
 	}
 }
