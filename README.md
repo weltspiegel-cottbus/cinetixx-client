@@ -2,15 +2,15 @@
 
 ## Changelog:
 
-* v2.0.0: Initial release
+* v2.0: Initial release
 
     Client implementing the Cinetixx XML API: https://api.cinetixx.de/
 
-* v2.1.0: YoutubeId release
+* v2.1: YoutubeId release
 
     Youtube ID will be calculated from trailer link
-    
+
 ## Todo
 
-* Reuqest seat infos
+* Request seat infos
 
