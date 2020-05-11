@@ -92,6 +92,12 @@ class CinetixxClient
 					->addImage($node->filterXPath('Show/IMAGE_1')->text())
 					->addImage($node->filterXPath('Show/IMAGE_2')->text())
 					->addImage($node->filterXPath('Show/IMAGE_3')->text());
+
+				// Saal auswerten, um Location (Weltspiegel oder Autokino) zu bestimmen
+				$saal = $node->filterXPath('Show/SAAL')->text();
+				$event->setLocation(strcasecmp('Lausitzer AutokinoFestival', $saal) === 0 ?
+					'Autokino' : 'Weltspiegel');
+
 				$events[$eventId] = $event;
 			} else {
 				$event = $events[$eventId];

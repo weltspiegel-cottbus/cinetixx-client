@@ -44,6 +44,9 @@ class Event
 	/** @var string */
 	private $youtubeId;
 
+	/** @var string */
+	private $location;
+
 	/** @var string[] */
 	private $images;
 
@@ -296,6 +299,22 @@ class Event
 	{
 		$this->youtubeId = $youtubeId;
 		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getLocation(): string
+	{
+		return $this->location;
+	}
+
+	/**
+	 * @param string $location
+	 */
+	public function setLocation(string $location): void
+	{
+		$this->location = $location;
 	}
 
 	/**

@@ -113,4 +113,10 @@ class EventTest extends TestCase
 		$this->event->addShow(new Show());
 		$this->assertEquals(3, count($this->event->getShows()));
 	}
+
+	public function testHasLocation()
+	{
+		$this->event->setLocation('Autokino');
+		$this->assertEquals('Autokino', $this->event->getLocation());
+	}
 }

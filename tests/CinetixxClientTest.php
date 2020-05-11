@@ -194,6 +194,17 @@ class CinetixxClientTest extends TestCase
 	 * @depends testReturnedEventsHaveIds
 	 * @param Event $event
 	 */
+	public function testReturnedEventsHaveLocations(Event $event)
+	{
+		if($event !== null) {
+			$this->assertNotEmpty($event->getLocation());
+		}
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveIds
+	 * @param Event $event
+	 */
 	public function testReturnedEventsHaveImages(Event $event)
 	{
 		if($event !== null) {
