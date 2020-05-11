@@ -10,6 +10,10 @@
 
     Youtube ID will be calculated from trailer link
 
+* v2.2: Autokino release
+
+    Respect the location and extract correct Kinoheld Links
+
 ## Todo
 
 * Request seat infos
