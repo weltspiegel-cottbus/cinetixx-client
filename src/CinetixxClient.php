@@ -103,6 +103,10 @@ class CinetixxClient
 				$event = $events[$eventId];
 			}
 
+			// Kinoheld Link zusammensetzen
+			$locationPath = $event->getLocation() == 'Autokino' ? 'lausitzer-autokinofestival-cottbus' : 'filmtheater-weltspiegel';
+			$baseUrl = 'https://www.kinoheld.de/kino-cottbus/' . $locationPath . '/vorstellung/';
+
 			// Add show to event
 			$show = new Show();
 			$show
@@ -110,7 +114,10 @@ class CinetixxClient
 				->setShowStart($node->filterXPath('Show/SHOW_BEGINNING')->text())
 				->setSellingStart($node->filterXPath('Show/VERKAUFSSTART')->text())
 				->setSellingEnd($node->filterXPath('Show/VERKAUFSENDE')->text())
-				->setCinetixxLink($node->filterXPath('Show/BOOKING_LINK')->text());
+				->setCinetixxLink($node->filterXPath('Show/BOOKING_LINK')->text())
+				->setKinoheldLink($baseUrl . $show->getId() . '?mode=widget#panel-seats')
+			;
+
 			$event->addShow($show);
 
 		});

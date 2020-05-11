@@ -236,65 +236,66 @@ class CinetixxClientTest extends TestCase
 	/**
 	 * @depends testReturnedEventsHaveShows
 	 * @param Show $show
-	 * @return Show
 	 */
 	public function testReturnedShowsHaveIds(Show $show)
 	{
 		if($show !== null) {
 			$this->assertGreaterThan(0, $show->getId());
 		}
-		return $show;
 	}
 
 	/**
 	 * @depends testReturnedEventsHaveShows
 	 * @param Show $show
-	 * @return Show
 	 */
 	public function testReturnedShowsHaveShowStarts(Show $show)
 	{
 		if($show !== null) {
 			$this->assertInstanceOf(\DateTime::class, $show->getShowStart());
 		}
-		return $show;
 	}
 
 	/**
 	 * @depends testReturnedEventsHaveShows
 	 * @param Show $show
-	 * @return Show
 	 */
 	public function testReturnedShowsHaveSellingStarts(Show $show)
 	{
 		if($show !== null) {
 			$this->assertInstanceOf(\DateTime::class, $show->getSellingStart());
 		}
-		return $show;
 	}
 
 	/**
 	 * @depends testReturnedEventsHaveShows
 	 * @param Show $show
-	 * @return Show
 	 */
 	public function testReturnedShowsHaveSellingEnds(Show $show)
 	{
 		if($show !== null) {
 			$this->assertInstanceOf(\DateTime::class, $show->getSellingEnd());
 		}
-		return $show;
 	}
 
 	/**
 	 * @depends testReturnedEventsHaveShows
 	 * @param Show $show
-	 * @return Show
 	 */
 	public function testReturnedShowsHaveCinetixxLinks(Show $show)
 	{
 		if($show !== null) {
 			$this->assertIsString($show->getCinetixxLink());
 		}
-		return $show;
+	}
+
+	/**
+	 * @depends testReturnedEventsHaveShows
+	 * @param Show $show
+	 */
+	public function testReturnedShowsHaveKinoheldLinks(Show $show)
+	{
+		if($show !== null) {
+			$this->assertIsString($show->getKinoheldLink());
+		}
 	}
 }
