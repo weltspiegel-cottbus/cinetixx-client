@@ -19,8 +19,11 @@ class Show
 	/** @var DateTime */
 	private $sellingEnd;
 
-  /** @var string */
+	/** @var string */
 	private $cinetixxLink;
+
+	/** @var string */
+	private $kinoheldLink;
 
 	/**
 	 * @return int
@@ -113,5 +116,21 @@ class Show
 	{
 		$this->cinetixxLink = $cinetixxLink;
 		return $this;
+	}
+
+	/**
+	 * @return string
+	 */
+	public function getKinoheldLink(): string
+	{
+		return $this->kinoheldLink;
+	}
+
+	/**
+	 * @param string $kinoheldLink
+	 */
+	public function setKinoheldLink(string $kinoheldLink): void
+	{
+		$this->kinoheldLink = $kinoheldLink;
 	}
 }

@@ -60,4 +60,11 @@ class ShowTest extends TestCase
 		}
 		$this->assertEquals($cinetixxLink, $this->show->getCinetixxLink());
 	}
+
+	public function testHasKinoheldLink()
+	{
+		$kinoheldLink = 'https://www.kinoheld.de/';
+		$this->show->setKinoheldLink($kinoheldLink);
+		$this->assertEquals($kinoheldLink, $this->show->getKinoheldLink());
+	}
 }
