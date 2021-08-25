@@ -5,7 +5,7 @@
 	"authors": [
 		{
 			"name": "Micha Alt",
-			"email": "mail@lean-stack.de"
+			"email": "webmaster@weltspiegel-cottbus.de"
 		}
 	],
 	"scripts": {
@@ -33,7 +33,7 @@
 	},
 	"extra": {
 		"branch-alias": {
-			"dev-master": "2.3-dev"
+			"dev-master": "2.4-dev"
 		}
 	}
 }
