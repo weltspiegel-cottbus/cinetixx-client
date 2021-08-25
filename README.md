@@ -2,19 +2,18 @@
 
 ## Changelog:
 
-* v2.0: Initial release
+* v2.3: Clean GitHub Release
 
-    Client implementing the Cinetixx XML API: https://api.cinetixx.de/
+    Updated deps and some cleanup.
+    
+* v2.2: Autokino release
+
+    Respect the location and extract correct Kinoheld Links
 
 * v2.1: YoutubeId release
 
     Youtube ID will be calculated from trailer link
 
-* v2.2: Autokino release
+* v2.0: Initial release
 
-    Respect the location and extract correct Kinoheld Links
-
-## Todo
-
-* Request seat infos
-
+    Client implementing the Cinetixx XML API: https://api.cinetixx.de/

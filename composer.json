@@ -23,13 +23,13 @@
 		}
 	},
 	"require": {
-		"php": "^7.3.11",
-		"symfony/http-client": "^5.0",
-		"symfony/dom-crawler": "^5.0",
-		"symfony/cache": "^5.0"
+		"php": "^8.0.9",
+		"symfony/cache": "^5.3",
+		"symfony/http-client": "^5.3",
+		"symfony/dom-crawler": "^5.3"
 	},
 	"require-dev": {
-		"phpunit/phpunit": "^9.1"
+		"phpunit/phpunit": "^9.5"
 	},
 	"extra": {
 		"branch-alias": {
